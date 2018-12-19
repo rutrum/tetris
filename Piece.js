@@ -13,35 +13,41 @@ class Piece {
         this.rand = Math.floor(Math.random() * 7) + 1;
         var shape;
         if (this.rand === 1) {
+            this.letter = 'J';
             shape = [
                 [1,0,0],
                 [1,1,1],
                 [0,0,0]
             ];
         } else if (this.rand === 2) {
+            this.letter = 'L';
             shape = [
                 [0,0,1],
                 [1,1,1],
                 [0,0,0]
             ];
         } else if (this.rand === 3) {
+            this.letter = 'O';
             shape = [
                 [1,1],
                 [1,1]
             ];
         } else if (this.rand === 4) {
+            this.letter = 'S';
             shape = [
                 [0,0,0],
                 [0,1,1],
                 [1,1,0]
             ];
         } else if (this.rand === 5) {
+            this.letter = 'Z';
             shape = [
                 [0,0,0],
                 [1,1,0],
                 [0,1,1]
             ];
         } else if (this.rand === 6) {
+            this.letter = 'I';
             shape = [
                 [0,0,0,0],
                 [1,1,1,1],
@@ -49,6 +55,7 @@ class Piece {
                 [0,0,0,0]
             ];
         } else if (this.rand === 7) {
+            this.letter = 'T';
             shape = [
                 [0,0,0],
                 [1,1,1],
