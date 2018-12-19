@@ -28,16 +28,18 @@ class Game {
             this.pressDown();
         }
 
+        this.arena.show();
+        this.falling.show();
+        this.updateStats();
+
+    }
+
+    checkForLineClear() {
         var cleared = this.arena.sweepLines();
         if (cleared > 0) {
             this.score += Math.pow(2,cleared)*100;
             this.lines += cleared;
         }
-        
-        this.arena.show();
-        this.falling.show();
-        this.updateStats();
-
     }
 
     checkForCollisions() {
@@ -61,16 +63,20 @@ class Game {
                 this.falling.moveRight();
             } else if (this.lastAction == "right") {
                 this.falling.moveLeft();
-            } if (this.lastAction == "down") {
+            } else if (this.lastAction == "down") {
                 this.falling.moveUp();
                 this.arena.addPiece(this.falling);
                 this.newFalling();
+            } else if (this.lastAction == "rotate") {
+                // Just undo the rotation
+                this.falling.rotate("counter");
             }
             conflicted = this.arena.conflict(this.falling);
         }
     }
 
     newFalling() {
+        this.checkForLineClear();
         this.falling = new Piece(this.gridWidth);
         this.lastAction = "new"
         this.level += 1;
@@ -102,6 +108,7 @@ class Game {
     }
 
     pressUp() {
+        this.lastAction = "rotate";
         this.falling.rotate();
         this.checkForCollisions();
     }

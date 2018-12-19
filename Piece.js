@@ -66,13 +66,24 @@ class Piece {
     }
 
     rotate(direction) {
-        for (let i = 0; i < this.matrix.length; i++) {
-            for (let j = 0; j < i; j++) {
-                [this.matrix[i][j],this.matrix[j][i]] =
-                        [this.matrix[j][i],this.matrix[i][j]];
+        const len = this.matrix.length;
+        if (direction === "counter") {
+            this.matrix.forEach(row => row.reverse());
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < i; j++) {
+                    [this.matrix[i][j],this.matrix[j][i]] =
+                            [this.matrix[j][i],this.matrix[i][j]];
+                }
             }
+        } else {
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < i; j++) {
+                    [this.matrix[i][j],this.matrix[j][i]] =
+                            [this.matrix[j][i],this.matrix[i][j]];
+                }
+            }
+            this.matrix.forEach(row => row.reverse());
         }
-        this.matrix.forEach(row => row.reverse());
     }
 
     show() {
