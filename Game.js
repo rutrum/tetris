@@ -92,6 +92,7 @@ class Game {
             this.falling.moveDown();
         }
         this.lastAction = "down";
+        this.dropTimer = 0;
     }
 
     pressDown() {
