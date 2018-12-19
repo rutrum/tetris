@@ -25,13 +25,22 @@ class Game {
         // Drop piece
         this.dropTimer++;
         if (this.dropTimer >= this.fallingSpeed) {
-            this.dropTimer = 0;
-            this.falling.moveDown();
-            this.lastAction = "down";
+            this.pressDown();
         }
 
-        // Move this conflicted and out of bounds to event listeners, that's why game sometimes breaks
+        var cleared = this.arena.sweepLines();
+        if (cleared > 0) {
+            this.score += Math.pow(2,cleared)*100;
+            this.lines += cleared;
+        }
+        
+        this.arena.show();
+        this.falling.show();
+        this.updateStats();
 
+    }
+
+    checkForCollisions() {
         var outOfBounds = this.arena.outOfBounds(this.falling);
         while (outOfBounds) {
             if (outOfBounds == "left") {
@@ -59,17 +68,6 @@ class Game {
             }
             conflicted = this.arena.conflict(this.falling);
         }
-
-        var cleared = this.arena.sweepLines();
-        if (cleared > 0) {
-            this.score += Math.pow(2,cleared)*100;
-            this.lines += cleared;
-        }
-        
-        this.arena.show();
-        this.falling.show();
-        this.updateStats();
-
     }
 
     newFalling() {
@@ -93,26 +91,31 @@ class Game {
         }
         this.lastAction = "down";
         this.dropTimer = 0;
+        this.checkForCollisions();
     }
 
     pressDown() {
         this.lastAction = "down";
         this.falling.moveDown();
         this.dropTimer = 0;
+        this.checkForCollisions();
     }
 
     pressUp() {
         this.falling.rotate();
+        this.checkForCollisions();
     }
 
     pressLeft() {
         this.lastAction = "left";
         this.falling.moveLeft();
+        this.checkForCollisions();
     }
 
     pressRight() {
         this.lastAction = "right";
         this.falling.moveRight();
+        this.checkForCollisions();
     }
 
     pressSpace() {
