@@ -1,13 +1,14 @@
 class Arena {
 
-    constructor() {
+    constructor(w, h) {
         
-        this.mHeight = 15;
-        this.mWidth = 10;
+        this.mHeight = h;
+        this.mWidth = w;
 
         this.size = 30;
 
         this.matrix = this.generateMatrix();
+        console.log(this.matrix);
 
     }
 
@@ -75,7 +76,6 @@ class Arena {
                     } else if (i + p.xpos < 0) {
                         return "left";
                     } else if (j + p.ypos >= this.mHeight) {
-                        console.log(j);
                         return "bottom";
                     }
                 }

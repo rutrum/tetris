@@ -6,10 +6,10 @@ var lines;
 
 function setup() {
     //background(200);
-    createCanvas(300, 450);
+    createCanvas(300, 600);
     frameRate(60);
     clr = color(255, 0, 0);
-    game = new Arena();
+    game = new Arena(10,20);
     newPiece();
     score = 0;
     level = 0;
@@ -18,7 +18,7 @@ function setup() {
 
 var dropTimer = 0;
 var dropCap = 60;
-var dropCapRate = .95;
+var dropCapRate = .99;
 var lastAction;
 
 function draw() {
@@ -33,7 +33,7 @@ function draw() {
 
     isOut = game.outOfBounds(tpiece);
 
-    if (isOut) {
+    while (isOut) {
         console.log(isOut);
         if (isOut == "left") {
             tpiece.moveRight();
@@ -44,6 +44,7 @@ function draw() {
             game.addPiece(tpiece);
             newPiece();
         }
+        isOut = game.outOfBounds(tpiece);
     }
 
     if (game.conflict(tpiece)) {
@@ -74,7 +75,6 @@ function updateStats() {
     document.querySelector("#score").innerHTML = score;
     document.querySelector("#lines").innerHTML = lines;
     document.querySelector("#level").innerHTML = level;
-
 }
 
 function dropPiece() {
