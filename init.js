@@ -23,4 +23,9 @@ function setup() {
 function draw() {
     background(230);
     game.show();
+
+    // update statistics
+    document.querySelector("#score").innerHTML = game.score;
+    document.querySelector("#lines").innerHTML = game.lines;
+    document.querySelector("#level").innerHTML = game.level;
 }

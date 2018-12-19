@@ -30,7 +30,6 @@ class Game {
 
         this.arena.show();
         this.falling.show();
-        this.updateStats();
 
     }
 
@@ -83,12 +82,6 @@ class Game {
         if (this.arena.conflict(this.falling)) {
             this.arena = new Arena(this.gridWidth, this.gridHeight);
         }
-    }
-
-    updateStats() {
-        document.querySelector("#score").innerHTML = score;
-        document.querySelector("#lines").innerHTML = lines;
-        document.querySelector("#level").innerHTML = level;
     }
 
     dropPiece() {
