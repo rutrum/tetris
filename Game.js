@@ -15,13 +15,14 @@ class Game {
         this.lines = 0; // Number of lines cleared
 
         this.arena = new Arena(this.gridWidth, this.gridHeight, this.size);
+        this.preview = new Preview(this.size);
+        this.preview.enqueue(new Piece(this.gridWidth,this.size));
         this.falling = new Piece(this.gridWidth, this.size);
 
         this.gameEnd = false;
     }
 
     show() {
-
         // Drop piece
         this.dropTimer++;
         if (this.dropTimer >= this.fallingSpeed) {
@@ -30,6 +31,7 @@ class Game {
 
         this.arena.show();
         this.falling.show();
+        this.preview.show();
 
     }
 
@@ -76,7 +78,8 @@ class Game {
 
     newFalling() {
         this.checkForLineClear();
-        this.falling = new Piece(this.gridWidth, this.size);
+        this.falling = this.preview.dequeue();
+        this.preview.enqueue(new Piece(this.gridWidth, this.size));
         this.lastAction = "new"
         this.addLevel();
         if (this.arena.conflict(this.falling)) {
