@@ -3,12 +3,21 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>p5.js example</title>
+        <title>Tetris</title>
         <style> 
-            body {padding: 0; margin: 0;} 
-            .stats {
-                width: 200px;
+            body {
+                padding: 0;
+                margin: 0;
                 text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            } 
+            .stats {
+                text-align: center;
+            }
+            canvas {
+                border: 5px solid #aaa
             }
         </style>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script> -->
@@ -23,7 +32,6 @@
         <script src="init.js"></script>
     </head>
     <body>
-
         <div class="stats">
             Score: <span id="score">0</span><br>
             Lines: <span id="lines">0</span><br>
