@@ -1,7 +1,7 @@
 class Preview {
 
     constructor(size) {
-        this.size = size / 3;
+        this.size = size / 2;
     }
 
     dequeue() {
