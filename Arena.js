@@ -1,11 +1,11 @@
 class Arena {
 
-    constructor(w, h) {
+    constructor(w, h, s) {
         
         this.mHeight = h;
         this.mWidth = w;
 
-        this.size = 30;
+        this.size = s;
 
         this.matrix = this.generateMatrix();
 

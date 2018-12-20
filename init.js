@@ -1,9 +1,15 @@
 var game;
 
 function setup() {
-    createCanvas(300, 600);
+    // Call from DOM all user settings
+    let settings = {
+        width: 15,
+        height: 15,
+        size: 30,
+    }
+    createCanvas(settings.width * settings.size, settings.height * settings.size);
     frameRate(60);
-    game = new Game();
+    game = new Game(settings);
 
     document.addEventListener('keydown', event => {
         if (event.keyCode === 40 || event.keyCode === 68) {

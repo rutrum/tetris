@@ -1,21 +1,21 @@
 class Game {
 
-    constructor() {
-        this.gridWidth = 10;
-        this.gridHeight = 20;
+    constructor(settings) {
+        this.gridWidth = settings.width;
+        this.gridHeight = settings.height;
 
-        this.resolution = 30; // Size of each block
+        this.size = settings.size; // Size of each block
 
         this.dropTimer = 0;
-        this.fallingSpeed = 50; // Frames delay
+        this.fallingSpeed = 30; // Frames delay
 
         // Statistics
         this.level = 0; // Number of dropped pieces
         this.score = 0; // Arbitary
         this.lines = 0; // Number of lines cleared
 
-        this.arena = new Arena(this.gridWidth, this.gridHeight);
-        this.falling = new Piece(this.gridWidth);
+        this.arena = new Arena(this.gridWidth, this.gridHeight, this.size);
+        this.falling = new Piece(this.gridWidth, this.size);
 
         this.gameEnd = false;
     }
@@ -76,15 +76,16 @@ class Game {
 
     newFalling() {
         this.checkForLineClear();
-        this.falling = new Piece(this.gridWidth);
+        this.falling = new Piece(this.gridWidth, this.size);
         this.lastAction = "new"
         this.addLevel();
         if (this.arena.conflict(this.falling)) {
-            this.arena = new Arena(this.gridWidth, this.gridHeight);
+            // Game end
+            this.arena = new Arena(this.gridWidth, this.gridHeight, this.size);
             this.level = 0;
             this.score = 0;
             this.lines = 0;
-            this.fallingSpeed = 50;
+            this.fallingSpeed = 30;
         }
     }
 
@@ -100,7 +101,7 @@ class Game {
     addLevel() {
         this.level += 1;
         if (this.level % 10 == 0) {
-            this.fallingSpeed *= .8;
+            this.fallingSpeed *= .9;
         }
     }
 

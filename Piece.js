@@ -1,11 +1,11 @@
 class Piece {
 
-    constructor(x) {
+    constructor(x, s) {
 
         this.matrix = this.generatePiece();
         this.xpos = Math.floor((x-this.matrix.length)/2);
         this.ypos = 0;
-        this.size = 30;
+        this.size = s;
 
     }
 
