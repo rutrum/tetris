@@ -7,7 +7,7 @@ class Game {
         this.resolution = 30; // Size of each block
 
         this.dropTimer = 0;
-        this.fallingSpeed = 30; // Frames delay
+        this.fallingSpeed = 50; // Frames delay
 
         // Statistics
         this.level = 0; // Number of dropped pieces
@@ -78,9 +78,13 @@ class Game {
         this.checkForLineClear();
         this.falling = new Piece(this.gridWidth);
         this.lastAction = "new"
-        this.level += 1;
+        this.addLevel();
         if (this.arena.conflict(this.falling)) {
             this.arena = new Arena(this.gridWidth, this.gridHeight);
+            this.level = 0;
+            this.score = 0;
+            this.lines = 0;
+            this.fallingSpeed = 50;
         }
     }
 
@@ -91,6 +95,13 @@ class Game {
         this.lastAction = "down";
         this.dropTimer = 0;
         this.checkForCollisions();
+    }
+
+    addLevel() {
+        this.level += 1;
+        if (this.level % 10 == 0) {
+            this.fallingSpeed *= .8;
+        }
     }
 
     pressDown() {

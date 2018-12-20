@@ -8,7 +8,6 @@ class Arena {
         this.size = 30;
 
         this.matrix = this.generateMatrix();
-        console.log(this.matrix);
 
     }
 

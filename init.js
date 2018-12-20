@@ -27,5 +27,6 @@ function draw() {
     // update statistics
     document.querySelector("#score").innerHTML = game.score;
     document.querySelector("#lines").innerHTML = game.lines;
+    document.querySelector("#speed").innerHTML = game.fallingSpeed;
     document.querySelector("#level").innerHTML = game.level;
 }
