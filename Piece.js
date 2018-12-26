@@ -65,6 +65,10 @@ class Piece {
         return shape;
     }
 
+    setColor(num) {
+        this.rand = num;
+    }
+
     rotate(direction) {
         const len = this.matrix.length;
         if (direction === "counter") {

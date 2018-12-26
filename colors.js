@@ -8,5 +8,6 @@ function getColor(i) {
         case 5: return color(0, 204, 0);
         case 6: return color(0, 204, 255);
         case 7: return color(89, 0, 179);
+        case 8: return color(255, 255, 255);
     }
 }   

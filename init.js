@@ -26,6 +26,7 @@ function setup() {
     });
 
     // Load records from local storage
+    // Or create an empty one if its not there
     const record = localStorage.getItem("record");
     if (record !== null) {
         document.querySelector("#recscore").innerHTML = record.score;
