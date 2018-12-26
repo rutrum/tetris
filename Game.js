@@ -34,6 +34,11 @@ class Game {
             this.falling.show();
             this.preview.show();
 
+            // Draw transparent box behind text
+            fill(color(15,15,15,200));
+            rect(0, this.center.y - 70, this.gridWidth * this.size, 140);
+
+            // Draw game over text
             fill(color(255,0,0));
             textFont('monospace');
             textSize(50);
