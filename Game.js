@@ -3,6 +3,10 @@ class Game {
     constructor(settings) {
         this.gridWidth = settings.width;
         this.gridHeight = settings.height;
+        this.center = {
+            x: settings.width/2 * settings.size,
+            y: settings.height/2 * settings.size,
+        }
 
         this.size = settings.size; // Size of each block
 
@@ -23,16 +27,31 @@ class Game {
     }
 
     show() {
-        // Drop piece
-        this.dropTimer++;
-        if (this.dropTimer >= this.fallingSpeed) {
-            this.pressDown();
+
+        if (this.gameEnd) {
+
+            this.arena.show();
+            this.falling.show();
+            this.preview.show();
+
+            fill(color(255,0,0));
+            textFont('monospace');
+            textSize(50);
+            textAlign(CENTER, CENTER);
+            text("GAME\nOVER", this.center.x, this.center.y);
+        
+        } else {
+            
+            // Drop piece
+            this.dropTimer++;
+            if (this.dropTimer >= this.fallingSpeed) {
+                this.pressDown();
+            }
+
+            this.arena.show();
+            this.falling.show();
+            this.preview.show();
         }
-
-        this.arena.show();
-        this.falling.show();
-        this.preview.show();
-
     }
 
     checkForLineClear() {
@@ -68,6 +87,7 @@ class Game {
                 this.falling.moveUp();
                 this.arena.addPiece(this.falling);
                 this.newFalling();
+                break;
             } else if (this.lastAction == "rotate") {
                 // Just undo the rotation
                 this.falling.rotate("counter");
@@ -84,11 +104,7 @@ class Game {
         this.addLevel();
         if (this.arena.conflict(this.falling)) {
             // Game end
-            this.arena = new Arena(this.gridWidth, this.gridHeight, this.size);
-            this.level = 0;
-            this.score = 0;
-            this.lines = 0;
-            this.fallingSpeed = 30;
+            this.gameEnd = true;
         }
     }
 
@@ -109,6 +125,7 @@ class Game {
     }
 
     pressDown() {
+        if (this.gameEnd) return;
         this.lastAction = "down";
         this.falling.moveDown();
         this.dropTimer = 0;
@@ -116,25 +133,40 @@ class Game {
     }
 
     pressUp() {
+        if (this.gameEnd) return;
         this.lastAction = "rotate";
         this.falling.rotate();
         this.checkForCollisions();
     }
 
     pressLeft() {
+        if (this.gameEnd) return;
         this.lastAction = "left";
         this.falling.moveLeft();
         this.checkForCollisions();
     }
 
     pressRight() {
+        if (this.gameEnd) return;
         this.lastAction = "right";
         this.falling.moveRight();
         this.checkForCollisions();
     }
 
     pressSpace() {
+        if (this.gameEnd) return;
         this.dropPiece();
+    }
+
+    pressR() {
+        if (this.gameEnd) {
+            this.gameEnd = false;
+            this.arena = new Arena(this.gridWidth, this.gridHeight, this.size);
+            this.level = 0;
+            this.score = 0;
+            this.lines = 0;
+            this.fallingSpeed = 30;
+        }
     }
 
 }

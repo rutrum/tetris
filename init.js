@@ -22,6 +22,8 @@ function setup() {
             game.pressUp();
         } else if (event.keyCode === 32) {
             game.pressSpace();
+        } else if (event.keyCode === 82) {
+            game.pressR();
         }
     });
 
