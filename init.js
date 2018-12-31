@@ -21,6 +21,7 @@ function setup() {
         } else if (event.keyCode === 38 || event.keyCode === 69) {
             game.pressUp();
         } else if (event.keyCode === 32) {
+            event.preventDefault(); // Stop scrolling on space
             game.pressSpace();
         } else if (event.keyCode === 82) {
             game.pressR();

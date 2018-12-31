@@ -2,6 +2,11 @@ class Piece {
 
     constructor(x, s) {
 
+        const letters = ['J','L','O','S','Z','I','T']
+        this.rando = Math.floor(Math.random() * 7);
+        this.letter = letters[this.rando]
+        this.rando++
+
         this.matrix = this.generatePiece();
         this.xpos = Math.floor((x-this.matrix.length)/2);
         this.ypos = 0;
@@ -10,52 +15,44 @@ class Piece {
     }
 
     generatePiece() {
-        this.rand = Math.floor(Math.random() * 7) + 1;
-        var shape;
-        if (this.rand === 1) {
-            this.letter = 'J';
+        let shape
+        if (this.letter === 'J') {
             shape = [
                 [1,0,0],
                 [1,1,1],
                 [0,0,0]
             ];
-        } else if (this.rand === 2) {
-            this.letter = 'L';
+        } else if (this.letter === 'L') {
             shape = [
                 [0,0,1],
                 [1,1,1],
                 [0,0,0]
             ];
-        } else if (this.rand === 3) {
-            this.letter = 'O';
+        } else if (this.letter === 'O') {
             shape = [
                 [1,1],
                 [1,1]
             ];
-        } else if (this.rand === 4) {
-            this.letter = 'S';
+        } else if (this.letter === 'S') {
             shape = [
                 [0,0,0],
                 [0,1,1],
                 [1,1,0]
             ];
-        } else if (this.rand === 5) {
-            this.letter = 'Z';
+        } else if (this.letter === 'Z') {
             shape = [
                 [0,0,0],
                 [1,1,0],
                 [0,1,1]
             ];
-        } else if (this.rand === 6) {
-            this.letter = 'I';
+        } else if (this.letter === 'I') {
             shape = [
                 [0,0,0,0],
                 [1,1,1,1],
                 [0,0,0,0],
                 [0,0,0,0]
             ];
-        } else if (this.rand === 7) {
-            this.letter = 'T';
+        } else if (this.letter === 'T') {
             shape = [
                 [0,0,0],
                 [1,1,1],
@@ -63,10 +60,6 @@ class Piece {
             ];
         }
         return shape;
-    }
-
-    setColor(num) {
-        this.rand = num;
     }
 
     rotate(direction) {
@@ -92,7 +85,7 @@ class Piece {
 
     show() {
         strokeWeight(0);
-        fill(getColor(this.rand));
+        fill(getColor(this.letter));
         const s = this.size;
         for (let i = 0; i < this.matrix.length; i++) {
             for (let j = 0; j < this.matrix[i].length; j++) {

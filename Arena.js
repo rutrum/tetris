@@ -29,7 +29,7 @@ class Arena {
         for (let i = 0; i < p.matrix.length; i++) {
             for (let j = 0; j < p.matrix[i].length; j++) {
                 if (p.matrix[i][j] !== 0) {
-                    this.matrix[p.ypos + i][p.xpos + j] = p.rand;
+                    this.matrix[p.ypos + i][p.xpos + j] = p.letter;
                 }
             }
         }

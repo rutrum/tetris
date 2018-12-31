@@ -16,7 +16,7 @@ class Preview {
 
     show() {
         strokeWeight(0);
-        fill(getColor(this.piece.rand));
+        fill(getColor(this.piece.letter));
         const s = this.size;
         for (let i = 0; i < this.piece.matrix.length; i++) {
             for (let j = 0; j < this.piece.matrix[i].length; j++) {
