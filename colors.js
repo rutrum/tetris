@@ -8,6 +8,6 @@ function getColor(i) {
         case 'Z': return color(0, 204, 0);
         case 'I': return color(0, 204, 255);
         case 'T': return color(89, 0, 179);
-        case 8: return color(255, 255, 255);
+        case "shadow": return color(50, 50, 50);
     }
 }   

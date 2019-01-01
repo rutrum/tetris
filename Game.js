@@ -23,6 +23,8 @@ class Game {
         this.preview.enqueue(new Piece(this.gridWidth,this.size));
         this.falling = new Piece(this.gridWidth, this.size);
 
+        this.dropShadow();
+
         this.gameEnd = false;
     }
 
@@ -54,9 +56,24 @@ class Game {
             }
 
             this.arena.show();
+            this.shadow.show(true);
             this.falling.show();
             this.preview.show();
         }
+    }
+
+    dropShadow() {
+
+        this.shadow = new Piece(this.gridWidth, this.size);
+        this.shadow.xpos = this.falling.xpos;
+        this.shadow.ypos = this.falling.ypos;
+        this.shadow.letter = this.falling.letter;
+        this.shadow.matrix = this.falling.matrix;
+
+        while (this.arena.outOfBounds(this.shadow) === false && !this.arena.conflict(this.shadow)) {
+            this.shadow.moveDown();
+        }
+        this.shadow.moveUp();
     }
 
     checkForLineClear() {
@@ -111,6 +128,7 @@ class Game {
             // Game end
             this.gameEnd = true;
         }
+        this.dropShadow();
     }
 
     dropPiece() {
@@ -142,6 +160,7 @@ class Game {
         this.lastAction = "rotate";
         this.falling.rotate();
         this.checkForCollisions();
+        this.dropShadow();
     }
 
     pressLeft() {
@@ -149,6 +168,7 @@ class Game {
         this.lastAction = "left";
         this.falling.moveLeft();
         this.checkForCollisions();
+        this.dropShadow();
     }
 
     pressRight() {
@@ -156,6 +176,7 @@ class Game {
         this.lastAction = "right";
         this.falling.moveRight();
         this.checkForCollisions();
+        this.dropShadow();
     }
 
     pressSpace() {

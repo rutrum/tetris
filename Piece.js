@@ -83,9 +83,13 @@ class Piece {
         }
     }
 
-    show() {
+    show(shadow) {
         strokeWeight(0);
-        fill(getColor(this.letter));
+        let theColor = getColor(this.letter);
+        if (shadow) {
+            theColor.setAlpha(100);
+        }
+        fill(theColor)
         const s = this.size;
         for (let i = 0; i < this.matrix.length; i++) {
             for (let j = 0; j < this.matrix[i].length; j++) {
