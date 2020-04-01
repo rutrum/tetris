@@ -107,9 +107,9 @@ document.addEventListener('keydown', event => {
     } else if (event.keyCode === 39 || event.keyCode === 70) {
         lastAction = "right";
         tpiece.moveRight();
-    } else if (event.keyCode === 38 || event.keyCode === 69) {
+    } else if (event.keyCode === 90 || event.keyCode === 69) {
         tpiece.rotate(); 
-    } else if (event.keyCode === 32) {
+    } else if (event.keyCode === 38) {
         dropPiece();
     }
 });
